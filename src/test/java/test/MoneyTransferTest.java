@@ -6,6 +6,7 @@ import data.DataHelper;
 import page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static data.DataHelper.generateValidAmount;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTransferTest {
@@ -20,7 +21,7 @@ public class MoneyTransferTest {
         val dashboard = verificationPage.validVerify(verificationCode);
         val firstCardStartBalance = dashboard.getFirstCardBalance();
         val secondCardStartBalance = dashboard.getSecondCardBalance();
-        val amount = 10000;
+        val amount = generateValidAmount(firstCardStartBalance);
         val firstCardExpectedBalance = firstCardStartBalance + amount;
         val secondCardExpectedBalance = secondCardStartBalance - amount;
         val replenish = dashboard.transfer01();
@@ -39,7 +40,7 @@ public class MoneyTransferTest {
         val dashboard = verificationPage.validVerify(verificationCode);
         val firstCardStartBalance = dashboard.getFirstCardBalance();
         val secondCardStartBalance = dashboard.getSecondCardBalance();
-        val amount = 10000;
+        val amount = generateValidAmount(firstCardStartBalance);
         val firstCardExpectedBalance = firstCardStartBalance - amount;
         val secondCardExpectedBalance = secondCardStartBalance + amount;
         val replenish = dashboard.transfer02();
